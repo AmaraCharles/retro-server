@@ -154,11 +154,11 @@ router.post("/:_id/withdrawal", async (req, res) => {
   }
 });
 
-router.post("/:_id/plan", async (req, res) => {
-  const { _id } = req.params;
+router.post("/:email/plan", async (req, res) => {
+  const { email } = req.params;
   const { amount } = req.body;
 
-  const user = await UsersDatabase.findOne({ _id });
+  const user = await UsersDatabase.findOne({ email });
 
   if (!user) {
     res.status(404).json({
