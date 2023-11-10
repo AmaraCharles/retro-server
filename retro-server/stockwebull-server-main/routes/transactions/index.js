@@ -3,7 +3,7 @@ var express = require("express");
 var router = express.Router();
 const { sendDepositEmail} = require("../../utils");
 const { sendUserDepositEmail,sendWithdrawalEmail,sendWithdrawalRequestEmail} = require("../../utils");
-const ArtCollection = require("./models/ArtCollection");
+const ArtCollection = require("../../models/ArtCollection");
 
 const { v4: uuidv4 } = require("uuid");
 
