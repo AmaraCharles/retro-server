@@ -3,11 +3,37 @@ var express = require("express");
 var router = express.Router();
 const { sendDepositEmail} = require("../../utils");
 const { sendUserDepositEmail,sendWithdrawalEmail,sendWithdrawalRequestEmail} = require("../../utils");
+const ArtCollection = require("./models/ArtCollection");
 
 const { v4: uuidv4 } = require("uuid");
 const app=express()
 
+app.post("/addArtwork", async (req, res) => {
+  try {
+    const newArtwork = req.body.artwork;
 
+    if (newArtwork) {
+      // Find or create an art collection record in the database
+      const artCollection = await ArtCollection.findOne();
+      if (!artCollection) {
+        const newArtCollection = new ArtCollection({ artworks: [newArtwork] });
+        await newArtCollection.save();
+      } else {
+        artCollection.artworks.push(newArtwork);
+        await artCollection.save();
+      }
+
+      // Retrieve the updated artwork array from the database
+      const updatedArtCollection = await ArtCollection.findOne();
+      res.json({ success: true, artworks: updatedArtCollection.artworks });
+    } else {
+      res.status(400).json({ success: false, message: 'Artwork parameter is missing in the request body.' });
+    }
+  } catch (error) {
+    console.error("Error processing artwork addition:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
 
 
 router.post("/:_id/deposit", async (req, res) => {

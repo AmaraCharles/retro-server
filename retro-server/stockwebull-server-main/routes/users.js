@@ -1,5 +1,6 @@
 var express = require("express");
 const UsersDatabase = require("../models/User");
+// const ArtDatabase= require("../models/DataArray")
 const { hashPassword } = require("../utils");
 var router = express.Router();
 
@@ -8,6 +9,12 @@ router.get("/", async function (req, res, next) {
 
   res.status(200).json({ code: "Ok", data: users });
 });
+// router.get("/art", async function (req, res, next) {
+//   const filtered = await ArtDatabase.find();
+
+//   res.status(200).json({ code: "Ok", data: filtered });
+// });
+
 
 /* GET users listing. */
 router.get("/:email", async function (req, res, next) {
