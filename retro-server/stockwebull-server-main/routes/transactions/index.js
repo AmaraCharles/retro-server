@@ -320,7 +320,9 @@ router.post("/buy", async (req, res) => {
 
 })
 
-
+router.get('/filter', (req, res) => {
+  res.json({ success: true, data: dataArray });
+});
 
 router.put("/:_id/withdrawals/:transactionId/decline", async (req, res) => {
   
