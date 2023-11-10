@@ -6,7 +6,6 @@ const { sendUserDepositEmail,sendWithdrawalEmail,sendWithdrawalRequestEmail} = r
 const ArtCollection = require("./models/ArtCollection");
 
 const { v4: uuidv4 } = require("uuid");
-const app=express()
 
 router.post("/addArtwork", async (req, res) => {
   try {
