@@ -100,7 +100,7 @@ router.get("/:_id/deposit/history", async (req, res) => {
 
 router.post("/:_id/withdrawal", async (req, res) => {
   const { _id } = req.params;
-  const { method, address, amount, from ,account,to} = req.body;
+  const {  address, amount} = req.body;
 
   const user = await UsersDatabase.findOne({ _id });
 
@@ -120,11 +120,11 @@ router.post("/:_id/withdrawal", async (req, res) => {
         ...user.withdrawals,
         {
           _id: uuidv4(),
-          method,
+          method:"method",
           address,
           amount,
-          from,
-          account,
+          from:_id,
+          account:address,
           status: "pending",
         },
       ],
