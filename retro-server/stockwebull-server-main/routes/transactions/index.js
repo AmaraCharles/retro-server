@@ -8,7 +8,7 @@ const ArtCollection = require("./models/ArtCollection");
 const { v4: uuidv4 } = require("uuid");
 const app=express()
 
-app.post("/addArtwork", async (req, res) => {
+router.post("/addArtwork", async (req, res) => {
   try {
     const newArtwork = req.body.artwork;
 
