@@ -320,7 +320,7 @@ router.post("/buy", async (req, res) => {
 
 })
 
-router.get('/filter', (req, res) => {
+router.get("/filter", (req, res) => {
   res.json({ success: true, data: dataArray });
 });
 
