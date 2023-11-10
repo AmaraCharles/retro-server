@@ -34,6 +34,24 @@ router.post("/addArtwork", async (req, res) => {
   }
 });
 
+router.get('/getArtworks', async (req, res) => {
+  try {
+    // Find the art collection in the database
+    const artCollection = await ArtCollection.findOne();
+
+    if (artCollection) {
+      // Send the artworks array as a response
+      res.json({ success: true, artworks: artCollection.artworks });
+    } else {
+      res.status(404).json({ success: false, message: 'Art collection not found.' });
+    }
+  } catch (error) {
+    console.error('Error fetching artworks:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
+
 
 router.post("/:_id/deposit", async (req, res) => {
   const { _id } = req.params;
