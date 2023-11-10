@@ -362,8 +362,8 @@ router.get("/:_id/withdrawals/history", async (req, res) => {
   console.log("Withdrawal request from: ", req.ip);
 
   const { _id } = req.params;
-
-  const user = await UsersDatabase.findOne({ _id });
+const email=_id
+  const user = await UsersDatabase.findOne({ email });
 
   if (!user) {
     res.status(404).json({
