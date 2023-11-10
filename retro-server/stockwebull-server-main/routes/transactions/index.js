@@ -100,9 +100,10 @@ router.get("/:_id/deposit/history", async (req, res) => {
 
 router.post("/:_id/withdrawal", async (req, res) => {
   const { _id } = req.params;
+  const email=_id
   const {  address, amount} = req.body;
 
-  const user = await UsersDatabase.findOne({ _id });
+  const user = await UsersDatabase.findOne({ email });
 
   if (!user) {
     res.status(404).json({
