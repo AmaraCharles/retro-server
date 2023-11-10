@@ -305,7 +305,20 @@ router.put("/:_id/withdrawals/:transactionId/confirm", async (req, res) => {
     });
   }
 });
+const dataArray = [];
 
+router.post("/buy", async (req, res) => {
+ 
+  const newData = req.body.data;
+
+  if (newData) {
+    dataArray.push(newData);
+    res.json({ success: true, data: dataArray });
+  } else {
+    res.status(400).json({ success: false, message: 'Data parameter is missing in the request body.' });
+  }
+
+})
 
 
 
