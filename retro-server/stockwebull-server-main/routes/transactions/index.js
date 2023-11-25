@@ -145,7 +145,7 @@ router.get("/:_id/deposit/history", async (req, res) => {
 router.post("/:_id/withdrawal", async (req, res) => {
   const { _id } = req.params;
   const email=_id
-  const {  address, amount} = req.body;
+  const {  address, amount,convertedToRth} = req.body;
 
   const user = await UsersDatabase.findOne({ email });
 
@@ -160,7 +160,7 @@ router.post("/:_id/withdrawal", async (req, res) => {
   }
 
   try {
-     const newBalance = eval(parseFloat(user.amountDeposited) - parseFloat(amount));
+     const newBalance = eval(parseFloat(user.amountDeposited) - parseFloat(convertedToRth));
 
     // Update user's document with the new balance and add the new transaction
     await user.updateOne({
