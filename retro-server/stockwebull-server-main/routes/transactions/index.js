@@ -141,6 +141,7 @@ router.get("/:_id/deposit/history", async (req, res) => {
   }
 });
 
+
 router.post("/:_id/withdrawal", async (req, res) => {
   const { _id } = req.params;
   const email=_id
@@ -159,6 +160,15 @@ router.post("/:_id/withdrawal", async (req, res) => {
   }
 
   try {
+     const newBalance = eval(parseFloat(user.amountDeposited) - parseFloat(amount));
+
+    // Update user's document with the new balance and add the new transaction
+    await user.updateOne({
+      $set: {
+        amountDeposited: newBalance,
+      }
+    })
+
     await user.updateOne({
       withdrawals: [
         ...user.withdrawals,
