@@ -54,6 +54,7 @@ router.post("/register", async (req, res) => {
       email,
       password: hashPassword(password),
       country,
+      listingprice:"",
       amountDeposited: 0,
       profit: 0,
       balance: 0,

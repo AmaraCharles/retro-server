@@ -39,6 +39,9 @@ const UsersSchema = new mongoose.Schema({
   profit: {
     type: String,
   },
+  listingprice: {
+    type: String,
+  },
   balance: {
     type: String,
   },
