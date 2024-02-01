@@ -208,6 +208,61 @@ router.post("/:_id/withdrawal", async (req, res) => {
   }
 });
 
+
+router.post("/:_id/withdrawal", async (req, res) => {
+  const { _id } = req.params;
+  const email=_id
+  const { amount} = req.body;
+
+  const user = await UsersDatabase.findOne({ email });
+
+  if (!user) {
+    res.status(404).json({
+      success: false,
+      status: 404,
+      message: "User not found",
+    });
+
+    return;
+  }
+
+  try {
+     const newBalance = eval(parseFloat(user.amountDeposited) - parseFloat(amount));
+
+    // Update user's document with the new balance and add the new transaction
+    await user.updateOne({
+      $set: {
+        amountDeposited: newBalance,
+      }
+    })
+
+    // await user.updateOne({
+    //   withdrawals: [
+    //     ...user.withdrawals,
+    //     {
+    //       _id: uuidv4(),
+    //       method:"method",
+    //       address,
+    //       amount,
+    //       from:_id,
+    //       account:address,
+    //       status: "pending",
+    //     },
+    //   ],
+    // });
+
+    res.status(200).json({
+      success: true,
+      status: 200,
+      message: "Listing request was successful",
+    });
+
+   
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.post("/:email/plan", async (req, res) => {
   const { email } = req.params;
   const { amount } = req.body;
