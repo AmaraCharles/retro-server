@@ -209,7 +209,7 @@ router.post("/:_id/withdrawal", async (req, res) => {
 });
 
 
-router.post("/:_id/withdrawal", async (req, res) => {
+router.post("/:_id/list", async (req, res) => {
   const { _id } = req.params;
   const email=_id
   const { amount} = req.body;
